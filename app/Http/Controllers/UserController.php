@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Mail\OtpMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -54,7 +55,7 @@ class UserController extends Controller
 
             //token base login
             $token = $userCheck->createToken("authToken")->plainTextToken;
-            return response()->json(["status" => "success", "message" => "User Login Successfully"]);
+            return response()->json(["status" => "success", "message" => "User Login Successfully", "token" => $token]);
         }catch(Exception $e){
             return response()->json(["status" => "fail", "message" => $e->getMessage()]);
         }
@@ -66,7 +67,7 @@ class UserController extends Controller
 
 
     //otp check
-    public function sendOtpCode(Request $request){
+    public function SendOtpCode(Request $request){
         try{
 
             $request->validate([
@@ -94,7 +95,7 @@ class UserController extends Controller
 
 
     //verify otp
-    public function verifyOtp(Request $request){
+    public function VerifyOtp(Request $request){
         try{
             $request->validate([
                 "email" => "required|string|max:100",
