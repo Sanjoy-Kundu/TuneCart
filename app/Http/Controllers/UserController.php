@@ -93,7 +93,31 @@ class UserController extends Controller
 
 
 
-    
+    //verify otp
+    public function verifyOtp(Request $request){
+        try{
+            $request->validate([
+                "email" => "required|string|max:100",
+                "otp"   => "required|string|min:4"
+            ]);
+
+            $email = $request->input("email");
+            $otp   = $request->input("otp");
+
+            $userCheck = User::where("email","=",$email)->where("otp","=",$otp)->first();
+
+            if(!$userCheck){
+                return response()->json(["status" => "fail", "message" => "Invalid Otp."]);
+            }
+
+            User::where("email","=",$email)->update(["otp" => "0"]);
+            $token = $userCheck->createToken("authToken")->plainTextToken;
+            return response()->json(["status" => "success", "message" => "Otp Verification Successfully", "token" => $token]);            
+        }catch(Exception $e){
+            return response()->json(["status" => "fail", "message" => $e->getMessage()]);
+        }
+    }
+
 
 }
 
