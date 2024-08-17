@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Mail\OtpMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -59,6 +61,10 @@ class UserController extends Controller
     }
 
 
+
+
+
+
     //otp check
     public function sendOtpCode(Request $request){
         try{
@@ -71,15 +77,23 @@ class UserController extends Controller
             $otp = rand(1000,9999);
             $count = User::where("email","=",$email)->count();
             if($count == 1){
-                echo "email milse";
+                //echo "get email";
+                Mail::to($email)->send(new OtpMail($otp)); //form laravel documentation
+                User::where("email", "=",$email)->update(["otp" => $otp]); //update otp
+                return response()->json(["status" => "success", "message" => "Your 4 digits opt has been send successfully."]);
+            }
+            else{
+                return response()->json(["status" => "fail", "message" => "Invalid Email"]);
             }
 
         }catch(Exception $e){
             return response()->json(["status" => "fail", "message" => $e->getMessage()]);
         }
-      
     }
 
+
+
+    
 
 }
 
