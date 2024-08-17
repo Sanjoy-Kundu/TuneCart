@@ -13,3 +13,4 @@ use App\Http\Controllers\UserController;
 //     return view('welcome');
 // });
 Route::post("/user-registration", [UserController::class, "UserRegistration"]);
+Route::post("/user-login", [UserController::class, "UserLogin"]);

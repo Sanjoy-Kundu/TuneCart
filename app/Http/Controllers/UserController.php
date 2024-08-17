@@ -31,6 +31,29 @@ class UserController extends Controller
    }
 
 
- 
+
+
+
+ public function UserLogin(Request $request){
+    try{
+        $request->validate([
+            "email" => "required|string|max:100",
+            "password" => "required|string|min:3"
+        ]);
+        
+        $userCheck =  User::where("email",$request->input("email"))->first();
+        
+        //authentication check
+        if(!$userCheck || !Hash::check($request->input("password"),$userCheck->password)){
+            return response()->json(["status" => "fail", "message" => "Invalid User"]);
+        }
+
+        //token base login
+        $token = $userCheck->createToken("authToken")->plainTextToken;
+        return response()->json(["status" => "success", "message" => "User Login Successfully"]);
+    }catch(Exception $e){
+        return response()->json(["status" => "fail", "message" => $e->getMessage()]);
+    }
+ }
 }
 
