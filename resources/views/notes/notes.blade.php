@@ -70,9 +70,24 @@ Complete testing, deploy the project, and monitor for improvements.
 
 
 ==========================================
-a.step one:
+a.step one: fontend for (authentication)
 1. UserController
     a. user database schema added done;
+    b. user login completed
+    c. user reset password completed
+    d. user otp completed 
+
+2. a. signup form validation using javascipt source(public->function-> js singupCalculation.js)
+   b. adding javascript loader (tostify)
+   c. install process 
+      i. npm install --save toastify-js
+      ii. follow the documentation 
+      iii. config.js
+    
+   d. now we are installing axios
+        1. npm install axios 
+        2. conntect axios.js extension file  
+
 ==========================================
 
 

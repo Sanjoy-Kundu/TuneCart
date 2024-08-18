@@ -21,17 +21,16 @@ class UserController extends Controller
 
    public function UserRegistration(Request $request){
     try {
-        $request->validate([
-            'name' => 'required|string|max:1000',
-            'email' => 'required|string|email|max:50|unique:users,email',
-            'mobile' => 'required|string|max:50',
-            'otp' => 'required',
-            'password' => 'required|string|min:3'
-        ]);
+        // $request->validate([
+        //     'name' => 'required|string|max:100',
+        //     'email' => 'required|string|email|max:100|unique:users,email',
+        //     'mobile' => 'required|string|max:20',
+        //     'otp' => 'required',
+        //     'password' => 'required|string|min:3'
+        // ]);
         User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'otp' => $request->input('otp'),
             'mobile' => $request->input('mobile'),
             'password' => Hash::make($request->input('password'))
         ]);

@@ -7,14 +7,26 @@
     <link rel="icon" href="{{asset('assets/frontend')}}/images/favicon/1.png" type="image/x-icon">
     <title>Sign Up</title>
 
-    <!-- bootstrap css -->
+    {{--  bootstrap css --}}
     <link id="rtl-link" rel="stylesheet" type="text/css" href="{{asset('assets/frontend')}}/css/vendors/bootstrap.css">
 
 
-    <!-- font-awesome css -->
+    {{-- font-awesome css --}}
     <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend')}}/css/vendors/font-awesome.css">
     <!-- Template css -->
     <link id="color-link" rel="stylesheet" type="text/css" href="{{asset('assets/frontend')}}/css/style.css">
+    
+    {{-- axios and config custom file --}}
+    <script src="{{asset('js/axios.min.js')}}"></script>
+    <script src="{{asset('js/config.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    {{-- toastify js --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+
 </head>
 
 <body>
@@ -36,7 +48,7 @@
                         </div>
 
                         <div class="input-box">
-                            <form class="row g-4">
+                            <section class="row g-4" id="registration-form">
                                 <div class="col-12">
                                     <div class="form-floating theme-form-floating log-in-form">
                                         <input type="text" class="form-control" name="name" id="name" placeholder="Your Name">
@@ -63,20 +75,10 @@
                                         <label for="password">Password *</label>
                                     </div>
                                 </div>
-
-                                {{-- <div class="col-12">
-                                    <div class="forgot-box">
-                                        <div class="form-check ps-0 m-0 remember-box">
-                                            <input class="d-none checkbox_animated check-box" type="checkbox"id="flexCheckDefault">
-                                        </div>
-                                        <a href="forgot.html" style="float:left" class="forgot-password">Forgot Password?</a>
-                                    </div>
-                                </div> --}}
-
                                 <div class="col-12">
-                                    <button class="btn btn-animation w-100 justify-content-center" type="submit">SignUp</button>
+                                    <button onclick="onRegistration()" class="btn btn-animation w-100 justify-content-center">SignUp</button>
                                 </div>
-                            </form>
+                            </section>
                         </div>
 
                         <div class="other-log-in">
@@ -98,10 +100,61 @@
             </div>
         </div>
     </section>
+
+    <script>
+
+        async function onRegistration(){
+
+
+            //validation 
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let mobile = document.getElementById("mobile").value;
+            let password = document.getElementById("password").value;
+
+
+            if(name.length === 0){
+                errorToast("Name field is required");
+            }else if(email.length === 0){
+                errorToast("Email field is required");
+            }else if(mobile.length === 0){
+                errorToast("Mobile field is required");
+            }else if(mobile.length === 0){
+                errorToast("Please Enter a valid mobile number");
+            }else if(password.length === 0){
+                errorToast("Password field is required");
+            }
+
+
+
+
+
+            let postBody = {
+            "name" : document.getElementById("name").value,
+            "email" : document.getElementById("email").value,
+            "mobile" : document.getElementById("mobile").value,
+            "password" : document.getElementById("password").value
+            }
+            //console.log(postBody);
+
+            let res = await axios.post("/user-registration",postBody);
+            if(res.data["status"] === "success"){
+                successToast(res.data["message"]);
+               window.location.href ="/login"
+            }else{
+                errorToast(res.data["message"]);
+            }
+        }
+
+    </script>
+    
+
+
     <!-- log in section end -->
     <!-- Lazyload Js -->
+
     <script src="{{asset('assets/frontend')}}/js/lazysizes.min.js"></script>
-    <script src="{{asset('function/js/signupCalculation.js')}}"></script>
+
 </body>
 
 </html>
