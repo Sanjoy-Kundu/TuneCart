@@ -51,10 +51,10 @@ class UserController extends Controller
    }
     public function UserLogin(Request $request){
         try{
-            $request->validate([
-                "email" => "required|string|max:100",
-                "password" => "required|string|min:3"
-            ]);
+            // $request->validate([
+            //     "email" => "required|string|max:100",
+            //     "password" => "required|string|min:3"
+            // ]);
             
             $userCheck =  User::where("email",$request->input("email"))->first();
 
