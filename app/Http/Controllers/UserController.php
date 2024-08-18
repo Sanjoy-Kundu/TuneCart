@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use view;
 use App\Models\User;
 use App\Mail\OtpMail;
 use Illuminate\Http\Request;
@@ -12,6 +13,12 @@ use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
     //user registration
+
+    public function singupPage(){
+        return view("pages.auth.signupPage");
+    }
+
+
    public function UserRegistration(Request $request){
     try {
         $request->validate([
@@ -39,6 +46,10 @@ class UserController extends Controller
 
 
    //user login
+
+   public function loginPage(){
+    return view('pages.auth.loginPage');
+   }
     public function UserLogin(Request $request){
         try{
             $request->validate([
@@ -66,7 +77,11 @@ class UserController extends Controller
 
 
 
-    //otp check
+    //otp check forgt password
+    public function forgotPasswordPage(){
+        return view("pages.auth.forgotPasswordPage");
+    }
+
     public function SendOtpCode(Request $request){
         try{
 
@@ -95,6 +110,11 @@ class UserController extends Controller
 
 
     //verify otp
+
+    public function otpPage(){
+        return view("pages.auth.otpPage");
+    }
+
     public function VerifyOtp(Request $request){
         try{
             $request->validate([
