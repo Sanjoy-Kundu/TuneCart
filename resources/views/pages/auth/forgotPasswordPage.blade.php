@@ -15,6 +15,12 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend')}}/css/vendors/font-awesome.css">
     <!-- Template css -->
     <link id="color-link" rel="stylesheet" type="text/css" href="{{asset('assets/frontend')}}/css/style.css">
+
+      {{-- axios and config custom file --}}
+      <script src="{{asset('js/axios.min.js')}}"></script>
+      <script src="{{asset('js/config.js')}}"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 
 <body>
@@ -35,7 +41,7 @@
                         </div>
 
                         <div class="input-box">
-                            <form class="row g-4">
+                            <section class="row g-4">
                                 <div class="col-12">
                                     <div class="form-floating theme-form-floating log-in-form">
                                         <input type="email" class="form-control" name="email" id="email" placeholder="Email Address">
@@ -43,15 +49,44 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-animation w-100 justify-content-center" type="submit">NEXT</button>
+                                    <button class="btn btn-animation w-100 justify-content-center" onclick="sendOtp()">NEXT</button>
                                 </div>
-                            </form>
+                            </section>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+
+    <script>
+
+        async function sendOtp(){
+          
+            let email = document.getElementById("email").value; 
+            if(email.length === 0){
+                errorToast("Email Field is required");
+            }
+
+            let postData =  {email:email};
+            console.log(postData);
+            let res = await axios.post("/send-otp",postData);
+            if(res.data["status"] === "success"){
+                successToast(res.data["message"]);
+                window.location.href="/verify-otp"
+            }
+        }
+     
+    </script>
+
+
+
+
+
+
+
+
     <!-- log in section end -->
     <!-- Lazyload Js -->
     <script src="{{asset('assets/frontend')}}/js/lazysizes.min.js"></script>

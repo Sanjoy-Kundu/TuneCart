@@ -23,9 +23,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-    {{-- toastify js --}}
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 
 
 
@@ -70,7 +68,7 @@
                                         <div class="form-check ps-0 m-0 remember-box">
                                             <input class="d-none checkbox_animated check-box" type="checkbox"id="flexCheckDefault">
                                         </div>
-                                        <a href="forgot.html" target="_blank" style="float:left" class="forgot-password">Forgot Password?</a>
+                                        <a href="{{url('forgot-password')}}" target="_blank" style="float:left" class="forgot-password">Forgot Password?</a>
                                     </div>
                                 </div>
 
@@ -147,11 +145,12 @@
             }
 
             let res = await axios.post("/user-login",postData);
-            console.log(res.data["status"] === "success");
             if(res.data["status"] === "success"){
                 successToast(res.data["message"])
+                setToken(res.data["token"]);
+                //console.log(res.data["token"]);
             }else{
-                errorToast("Invalid Email");
+                errorToast("Email and Password does't match");
             }
         }
     </script>

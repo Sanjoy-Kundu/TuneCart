@@ -18,4 +18,7 @@ Route::post("/verify-otp", [UserController::class, "VerifyOtp"]);
 Route::get("/login", [UserController::class, "loginPage"]);
 Route::get("/signup", [UserController::class, "singupPage"]);
 Route::get("/forgot-password", [UserController::class, "forgotPasswordPage"]);
-Route::get("/user-otp", [UserController::class, "otpPage"]);
+Route::get("/verify-otp", [UserController::class, "otpPage"]);
+
+//login to dashboard
+

@@ -25,3 +25,10 @@ function errorToast(msg){
         },
       }).showToast();
 }
+
+
+//set token as token name 
+function setToken(token){
+  localStorage.setItem("token",`Bearer ${token}`);
+  alert("good");
+}
