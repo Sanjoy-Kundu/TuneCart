@@ -13,14 +13,20 @@ use App\Http\Controllers\CustomerController;
 
 Route::post("/user-registration", [UserController::class, "UserRegistration"]);
 Route::post("/user-login", [UserController::class, "UserLogin"]);
-Route::post("/send-otp", [UserController::class, "SendOtpCode"]);
-Route::post("/verify-otp", [UserController::class, "VerifyOtp"]);
+
 
 //pages 
 Route::get("/login", [UserController::class, "loginPage"])->name('login');
 Route::get("/signup", [UserController::class, "singupPage"]);
 Route::get("/forgot-password", [UserController::class, "forgotPasswordPage"]);
-Route::get("/verify-otp", [UserController::class, "otpPage"]);
+
+
+
+
+    //otp 
+    Route::get("/verify-otp", [UserController::class, "otpPage"]);
+    Route::post("/send-otp", [UserController::class, "SendOtpCode"]);
+    Route::post("/verify-otp", [UserController::class, "VerifyOtp"]);
 
 //login to dashboard
 
@@ -34,5 +40,11 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['customer'])->group(function () {
         Route::get("/dashboard/customer", [CustomerController::class, "customerDashoard"])->name('dashboard.customer');
     });
+
+    
+
+
+    Route::get('/logout', [UserController::class, "logout"]);
+
 
  });

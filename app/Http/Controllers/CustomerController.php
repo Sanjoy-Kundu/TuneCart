@@ -9,6 +9,8 @@ class CustomerController extends Controller
 {
     public function customerDashoard(){
 
-        return Auth::user()->name;
+        echo Auth::user()->name;
+        echo "<a a href='/logout'>Logout</a>";
+       
     }
 }
