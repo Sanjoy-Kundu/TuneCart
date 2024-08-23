@@ -63,9 +63,12 @@ class UserController extends Controller
                 return response()->json(["status" => "fail", "message" => "Invalid User"]);
             }
 
+            if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
             //token base login
             $token = $userCheck->createToken("authToken")->plainTextToken;
-            return response()->json(["status" => "success", "message" => "User Login Successfully", "token" => $token]);
+            return response()->json(["status" => "success", "message" => "User Login Successfully", "token" => $token, "userInfo" => $userCheck]);
+            }
+           
         }catch(Exception $e){
             return response()->json(["status" => "fail", "message" => $e->getMessage()]);
         }
@@ -130,6 +133,7 @@ class UserController extends Controller
                 return response()->json(["status" => "fail", "message" => "Invalid Otp."]);
             }
 
+            //otp update
             User::where("email","=",$email)->update(["otp" => "0"]);
             $token = $userCheck->createToken("authToken")->plainTextToken;
             return response()->json(["status" => "success", "message" => "Otp Verification Successfully", "token" => $token]);            
