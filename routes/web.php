@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CustomerController;
 
 /*
@@ -33,9 +34,20 @@ Route::get("/forgot-password", [UserController::class, "forgotPasswordPage"]);
 
 
 Route::middleware(['auth'])->group(function () {
+    //allcommon
+    Route::get("/user-profile", [ProfileController::class, "porfileDetails"])->middleware('auth:sanctum');
+    Route::post("/user-profile-update", [ProfileController::class, "profileDetailsUpdate"]);
+
+
+
     Route::middleware(['admin'])->group(function () {
         Route::get("/dashboard/admin", [AdminController::class, "adminDashoard"])->name('dashboard.admin');
+        //admin profile 
+        Route::get('/dashboard/admin/profile', [AdminController::class, "adminProfile"])->name('dashboard.admin.profile');
     });
+    
+    
+    
     
     Route::middleware(['customer'])->group(function () {
         Route::get("/dashboard/customer", [CustomerController::class, "customerDashoard"])->name('dashboard.customer');
@@ -44,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
     
 
 
-    Route::get('/logout', [UserController::class, "logout"]);
+    Route::get('/logout', [UserController::class, "logout"])->name('logout');
 
 
  });

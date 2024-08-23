@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function adminDashoard(){
-        return "Im admin Dashboard";
+        return view('pages.auth.admin.dashboard.index');
+    }
+
+    public function adminProfile(){
+        return view('pages.auth.admin.profile.index');
     }
 }
