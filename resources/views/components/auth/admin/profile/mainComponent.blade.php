@@ -1,67 +1,30 @@
 <main>
     <div class="container-fluid px-4">
         <h3 class="mt-4">Dashboard</h3>
-        {{-- <div class="row">
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-primary text-white mb-4">
-                    <div class="card-body">Primary Card</div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View Details</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                    <div class="card-body">Warning Card</div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View Details</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                    <div class="card-body">Success Card</div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View Details</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                    <div class="card-body">Danger Card</div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View Details</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
+      
         <div class="row">
             <div class="col-xl-6">
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-chart-area me-1"></i>
-                        <h4>Your Profile</h4>
+                        <h5>Your Profile</h5>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
                             <tr align="center">
-                                <td><h4>Name</h4></td>
+                                <td><h6>Name</h6></td>
                                 <td><input type="text" id="name" class="form-control" readonly></td>
                             </tr>
                             <tr align="center">
-                                <td><h4>Email</h4></td>
+                                <td><h6>Email</h6></td>
                                 <td><input type="email" id="email" class="form-control" readonly></td>
                             </tr>
                             <tr align="center">
-                                <td><h4>Mobile</h4></td>
+                                <td><h6>Mobile</h6></td>
                                 <td><input type="tel" id="mobile" class="form-control" readonly></td>
                             </tr>
                             <tr align="center">
-                                <td><h4>Role</h4></td>
+                                <td><h6>Role</h6></td>
                                 <td><input type="text" id="role" class="form-control" readonly></td>
                             </tr>
                         </table>
@@ -72,25 +35,87 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-chart-bar me-1"></i>
-                        <h4>Update Your Profile</h4>
+                        <h5>Update Your Profile</h5>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
                             <tr align="center">
-                                <td><h4>Name</h4></td>
+                                <td><h6>Name</h6></td>
                                 <td><input type="text" id="updateName" class="form-control" name="name"></td>
                             </tr>
                             <tr align="center">
-                                <td><h4>Email</h4></td>
+                                <td><h6>Email</h6></td>
                                 <td><input type="email" readonly id="updateEmail" class="form-control"></td>
                             </tr>
                             <tr align="center">
-                                <td><h4>Mobile</h4></td>
+                                <td><h6>Mobile</h6></td>
                                 <td><input type="tel" id="updateMobile" class="form-control" name="mobile"></td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td><button class="btn btn-primary" onclick="onUpdate()">UPDATE PROFILE</button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-chart-area me-1"></i>
+                        <h5>Upload Your Image</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <tr align="center">
+                                <td><h6>Image</h6></td>
+                                <td>
+                                    <input type="file" id="image" class="form-control" ecntype="multipart/form-data">
+                                </td>
+                                <tr>
+                                    <td></td>
+                                    <td><button class="btn btn-primary" onclick="onUploadImage()">UPLOAD IMAGE</button></td>
+                                </tr>
+                            </tr>
+                     
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar me-1"></i>
+                        <h5>Update Your Password</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <tr align="center">
+                                <td><h6>Old Password</h6></td>
+                                <td>
+                                    <input type="password" id="oldPassword" class="form-control" placeholder="Enter Your Old Password" name="old_password">
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                <td><h6>New Password</h6></td>
+                                <td>
+                                    <input type="password" id="newPassword" class="form-control" placeholder="Enter Your New Password">
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                <td><h6>Confirm Password</h6></td>
+                                <td>
+                                    <input type="password" id="confirmPassword" class="form-control" name="password" placeholder="Confirm Password">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><button class="btn btn-primary" onclick="onUpdatePassword()">UPDATE PASSWORD</button></td>
                             </tr>
                         </table>
                     </div>
@@ -152,5 +177,26 @@
         }catch(e){
             console.log(e);
         }
+    }
+
+
+    //profile update password 
+    function onUpdatePassword(){
+      let  oldPassword = document.getElementById("oldPassword").value;
+      let  newPassword = document.getElementById("newPassword").value;
+      let  confirmPassword = document.getElementById("confirmPassword").value;
+
+      if(oldPassword === ""){
+        errorToast("Old Password Field is requied");
+      }else if(newPassword === ""){
+        errorToast("New Password Field is required");
+      }else if(confirmPassword === ""){
+        errorToast("Confirm Password Field is required");
+      }else if(confirmPassword !== newPassword){
+        errorToast("Your Confirm Password and New Password Doesnot match");
+      }else{
+        let postPasswordBody = {password:confirmPassword}
+        console.log(postPasswordBody);
+      }
     }
 </script>

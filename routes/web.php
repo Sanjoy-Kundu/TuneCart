@@ -37,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
     //allcommon
     Route::get("/user-profile", [ProfileController::class, "porfileDetails"])->middleware('auth:sanctum');
     Route::post("/user-profile-update", [ProfileController::class, "profileDetailsUpdate"]);
+    Route::post("/user-password-reset", [ProfileController::class, "userPasswordReset"]);
 
 
 
