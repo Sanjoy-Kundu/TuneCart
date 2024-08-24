@@ -75,11 +75,11 @@
                             <tr align="center">
                                 <td><h6>Image</h6></td>
                                 <td>
-                                    <input type="file" id="image" class="form-control" ecntype="multipart/form-data">
+                                    <input type="file" id="user_profile" class="form-control" name="user_profile" ecntype="multipart/form-data">
                                 </td>
                                 <tr>
                                     <td></td>
-                                    <td><button class="btn btn-primary" onclick="onUploadImage()">UPLOAD IMAGE</button></td>
+                                    <td><button class="btn btn-primary" onclick="onUploadProfileImage()">UPLOAD IMAGE</button></td>
                                 </tr>
                             </tr>
                      
@@ -95,22 +95,17 @@
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
-                            <tr align="center">
-                                <td><h6>Old Password</h6></td>
-                                <td>
-                                    <input type="password" id="oldPassword" class="form-control" placeholder="Enter Your Old Password" name="old_password">
-                                </td>
-                            </tr>
+                       
                             <tr align="center">
                                 <td><h6>New Password</h6></td>
                                 <td>
-                                    <input type="password" id="newPassword" class="form-control" placeholder="Enter Your New Password">
+                                    <input type="password" id="newPassword" class="form-control" name="new_password" placeholder="Enter Your New Password">
                                 </td>
                             </tr>
                             <tr align="center">
                                 <td><h6>Confirm Password</h6></td>
                                 <td>
-                                    <input type="password" id="confirmPassword" class="form-control" name="password" placeholder="Confirm Password">
+                                    <input type="password" id="confirmPassword" class="form-control" name="confirm_password" placeholder="Confirm Password">
                                 </td>
                             </tr>
                             <tr>
@@ -181,22 +176,59 @@
 
 
     //profile update password 
-    function onUpdatePassword(){
-      let  oldPassword = document.getElementById("oldPassword").value;
+    async function onUpdatePassword(){
+
       let  newPassword = document.getElementById("newPassword").value;
       let  confirmPassword = document.getElementById("confirmPassword").value;
 
-      if(oldPassword === ""){
-        errorToast("Old Password Field is requied");
-      }else if(newPassword === ""){
+       if(newPassword === ""){
         errorToast("New Password Field is required");
       }else if(confirmPassword === ""){
         errorToast("Confirm Password Field is required");
       }else if(confirmPassword !== newPassword){
         errorToast("Your Confirm Password and New Password Doesnot match");
-      }else{
+      }
+
+
         let postPasswordBody = {password:confirmPassword}
         console.log(postPasswordBody);
-      }
+        // try{
+        //     let res =  await axios.post('/user-password-reset', postPasswordBody)
+        //     console.log(res)
+        //     if(res.data["status"] === "success"){
+        //         successToast(res.data["message"]);
+        //         await getProfile();
+        //         window.location.href ="/login";
+        //     }
+        // }catch(e){
+        //     console.log(e)
+        // }
+        
+      
     }
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+       
+
+
+
+     
+        
+    
 </script>

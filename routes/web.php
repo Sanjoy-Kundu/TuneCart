@@ -11,9 +11,9 @@ use App\Http\Controllers\CustomerController;
 | Web Api Routes
 |--------------------------------------------------------------------------
 */
-
 Route::post("/user-registration", [UserController::class, "UserRegistration"]);
 Route::post("/user-login", [UserController::class, "UserLogin"]);
+
 
 
 //pages 
@@ -34,11 +34,14 @@ Route::get("/forgot-password", [UserController::class, "forgotPasswordPage"]);
 
 
 Route::middleware(['auth'])->group(function () {
+
+    
+
     //allcommon
     Route::get("/user-profile", [ProfileController::class, "porfileDetails"])->middleware('auth:sanctum');
     Route::post("/user-profile-update", [ProfileController::class, "profileDetailsUpdate"]);
     Route::post("/user-password-reset", [ProfileController::class, "userPasswordReset"]);
-
+    Route::post('/user-profile-upload', [ProfileController::class, 'userProfileUpload']);
 
 
     Route::middleware(['admin'])->group(function () {
@@ -52,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::middleware(['customer'])->group(function () {
         Route::get("/dashboard/customer", [CustomerController::class, "customerDashoard"])->name('dashboard.customer');
+     
     });
 
     

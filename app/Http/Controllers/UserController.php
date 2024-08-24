@@ -55,6 +55,9 @@ class UserController extends Controller
             //     "email" => "required|string|max:100",
             //     "password" => "required|string|min:3"
             // ]);
+
+
+         
             
             $userCheck =  User::where("email",$request->input("email"))->first();
 
@@ -62,7 +65,7 @@ class UserController extends Controller
             if(!$userCheck || !Hash::check($request->input("password"),$userCheck->password)){
                 return response()->json(["status" => "fail", "message" => "Invalid User"]);
             }
-
+         
             if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
             //token base login
             $token = $userCheck->createToken("authToken")->plainTextToken;
@@ -87,6 +90,8 @@ class UserController extends Controller
     public function SendOtpCode(Request $request){
         try{
 
+
+            
             $request->validate([
                 "email" => "required|string|max:100|"
             ]);

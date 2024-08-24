@@ -94,9 +94,9 @@ let email = document.getElementById("email").value;
 let password = document.getElementById("password").value;
 
 
-if(email.length === 0){
+if(email === ""){
     errorToast("Email field is required");
-}else if(password.length === 0){
+}else if(password === ""){
     errorToast("Password field is required");
 }
 
@@ -113,9 +113,8 @@ let postBody = {
 let res = await axios.post("/user-login",postBody);
 if(res.data["status"] === "success"){
     setToken(res.data["token"]);
-    console.log(res.data["userInfo"]["role"]);
-    
-    console.log(res.data["userInfo"]["role"]);
+    //console.log(res.data["userInfo"]["role"]);
+    //console.log(res.data["userInfo"]["role"]);
     successToast(res.data["message"]);
     if(res.data["userInfo"]["role"] === "customer"){
       window.location.href ="/dashboard/customer"
@@ -124,8 +123,6 @@ if(res.data["status"] === "success"){
     }else if(res.data["userInfo"]["role"] === "vendor"){
         window.location.href ="/dashboard/vendor"
     }
-
-   
 }else{
     errorToast(res.data["message"]);
 }

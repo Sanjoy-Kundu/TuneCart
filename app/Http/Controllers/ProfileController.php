@@ -43,19 +43,37 @@ class ProfileController extends Controller
         try{
 
             $id = Auth::id();
-            $userInfoFormDB = User::where("id", "=", $id)->first();
-            return $userInfoFormDB;
-            //$oldPasswordFromInput = $request->input("old_password");
-            //$oldPasswordFromInputHasg = Hash::make($oldPasswordFromInput);
-            // echo $userInfoFormDB->password;
-            // // echo "<br/>";
-            // // echo $oldPasswordFromInputHasg;
-            // if(Hash::check($oldPasswordFromInput, $userInfoFormDB->password) === $userInfoFormDB){
-            //     echo "password milse";
-            // }else{
-            //     echo "mile nai";
+            return $id;
+            // $userInfoFormDB = User::where("id", "=", $id)->first();
+            // if(!Hash::check($request->input('old_password'), $userInfoFormDB->password)){
+            //     return response()->json(["status" => "fail", "message" => "Old Password doesn't match"]);
             // }
-           
+            // $newPassword = Hash::make($request->input('confirm_password'));
+
+            // User::where("id", "=", $id)->update([
+            //     "password" => $newPassword
+            // ]);
+            
+            // return response()->json(["status" => "success", "message" => "Your Password Change Successfully"]);
+        }catch(Exception $ex){
+            return response()->json(["status" => "fail", "message" =>$ex->getMessage()]);
+        }
+    }
+
+
+
+
+
+
+    public function userProfileUpload(Request $request){
+        try{
+            //$file = $request->hasFile('user_profile');
+            if($request->hasFile('user_profile')){
+                $file = $request->file("user_profile");
+                $fileName = time()."-".$file->getClientOriginalName();
+                $file->move_uploaded_file("/backend/uploads/profile/$fileName");
+                return response()->json(["status" => "success", "message" => "Proffile Uploaded Successfully"]);
+            }
 
         }catch(Exception $ex){
             return response()->json(["status" => "fail", "message" =>$ex->getMessage()]);
